@@ -91,7 +91,7 @@ impl<In, T, U, E> BoxCloneServiceLayer<In, T, U, E> {
     pub fn new<L>(inner_layer: L) -> Self
     where
         L: Layer<In> + Send + Sync + 'static,
-        L::Service: Service<T, Response = U, Error = E> + Send + Clone + 'static,
+        L::Service: Service<T, Response = U, Error = E> + Send + Sync + Clone + 'static,
         <L::Service as Service<T>>::Future: Send + 'static,
     {
         let layer = layer_fn(move |inner: In| {

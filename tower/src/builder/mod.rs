@@ -784,7 +784,7 @@ impl<L> ServiceBuilder<L> {
     >
     where
         L: Layer<S>,
-        L::Service: Service<R> + Clone + Send + 'static,
+        L::Service: Service<R> + Clone + Send + Sync + 'static,
         <L::Service as Service<R>>::Future: Send + 'static,
     {
         self.layer(crate::util::BoxCloneService::layer())
